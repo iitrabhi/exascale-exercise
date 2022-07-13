@@ -24,5 +24,9 @@ Run the following in the directory which contains the `main.py` file.
 ```
 python main.py
 ```
+The file `utilities.py` contains all the functions and the `Mesh` class used in the `main.py` file. You can change the dimensions of the domain, the number of elements in each direction and the forcing function inside `main.py`. The boundary conditions are hard coded to be fixed on the complete boundary of the domain.
+
+`RectangleMesh(point_1(list),point_2(list),nx(int),ny(int))`:
+Quadilateral mesh of the 2D rectangle $(x_1, y_1) \times (x_2, y_2)$. Given the number of cells $(nx, ny)$ in each direction, the total number of quadilaterals will be $nx \times ny$ and the total number of vertices will be $(nx + 1)\times(ny + 1)$.
 ## Solution
 ![](./github/pic_1.png)

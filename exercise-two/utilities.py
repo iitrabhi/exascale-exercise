@@ -49,6 +49,7 @@ class RectangleMesh():
         return b_nodes
 
     def plot(self):
+        """This method will plot the mesh"""
         for i in range(self.num_ele):
             p = Polygon(self.geomtery[np.ix_(
                 self.topology[i])], fc='white', ec="black", lw=3)
@@ -88,6 +89,7 @@ def jacobian(xi, eta, ele_num, mesh):
     return N, dN_dX[:, 0], dN_dX[:, 1], jac_det, gp_x, gp_y
 
 def assemble(mesh, load_expression=lambda x, y: 4 * (-y**2+y) * np.sin(np.pi * x)):
+    """This method will assemble the global stiffness matrix and force vector."""
     gp = [-np.sqrt(1 / 3), + np.sqrt(1 / 3)]
     global_stiffness = np.zeros((mesh.num_nodes, mesh.num_nodes))
     global_load = np.zeros(mesh.num_nodes)
@@ -100,7 +102,7 @@ def assemble(mesh, load_expression=lambda x, y: 4 * (-y**2+y) * np.sin(np.pi * x
                     xi, eta, ele_num, mesh)
 
                 # Here is the actual definition of poisson's equation.==>(u,x v,x+u,y v,y)
-                # Weights w_u,w_v=1
+                # Weights w_u, w_v=1
                 element_stiffness = element_stiffness + (
                     np.tensordot(dN_dx, dN_dx, 0) +
                     np.tensordot(dN_dy, dN_dy, 0)) * jac_det
@@ -117,12 +119,15 @@ def assemble(mesh, load_expression=lambda x, y: 4 * (-y**2+y) * np.sin(np.pi * x
     return global_stiffness, global_load
 
 def apply_boundary(mesh, K, F):
+    """This method will apply the fixed boundary condition to K and F."""
     K[np.ix_(mesh.boundary()), :] = 0
     K[np.ix_(mesh.boundary()), np.ix_(mesh.boundary())] = 1
     F[np.ix_(mesh.boundary())] = 0
     return K, F
 
 def quad2tri(mesh):
+    """This method will convert the quad topology to triangle topology 
+    for plotting the solution."""
     tri_topo = np.zeros((mesh.num_ele*2, 3)).astype(int)
     for i in range(mesh.num_ele):
         tri_topo[2*i, :] = mesh.topology[i, np.ix_([0, 1, 3])]
@@ -130,6 +135,7 @@ def quad2tri(mesh):
     return tri_topo
 
 def plot_attribute(mesh, attribute):
+    """This method will plot the scalar attributes over a given mesh."""
     triangles = quad2tri(mesh)
     triang = mtri.Triangulation(
         mesh.geomtery[:, 0], mesh.geomtery[:, 1], triangles)

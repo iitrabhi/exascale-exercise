@@ -30,11 +30,6 @@ print("This is processor ", rank, " and output", data)
 for i in range(rank+1, size):
     comm.Send(data, dest=i, tag=4)
 
-    # comm.Recv(receive_check_index, source=i, tag=7)
-    # check_index[:, i] = receive_check_index
-    # #print("This is processor ", rank, " \n", check_index)
-
-
 # Receive data from other processors
 for i in range(0, rank):
     receive_check_index = np.zeros(M)

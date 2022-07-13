@@ -18,15 +18,17 @@ mpirun -np 3 python3 try.py
 
 $$
   \underbrace{\left[ \begin{array}{c}
+      4   \\
       1   \\
-      2   \\
-      4
+      5
     \end{array}\right]}_{\text{Index Matrix}} ,
   \underbrace{\left[ \begin{array}{c|c|c|c}
-      1 & 0 & 1 & 0 \\
+      1 & 0 & 1 & 1 \\
       0 & 0 & 1 & 1 \\
-      0 & 0 & 1 & 0
+      0 & 0 & 1 & 1
     \end{array}\right]}_{\text{Check Matrix}}
 $$
 
-By looking at the check matrix we can say that value (1) that is on rank 2 is also available with rank 0. Similarly value (2) is available on rank 3.
+By looking at the check matrix we can say that value (4) that is on rank 2 is also available with rank 0 and 3. Similarly value (1) is available on rank 3.
+
+![](./github/pic_1.png)

@@ -22,3 +22,5 @@ $$
       0 & 0 & 1 & 0
     \end{array}\right]}_{\text{Check Matrix}}
 $$
+
+By looking at the check matrix we can say that value (1) that is on rank 2 is also available with rank 0. Similarly value (2) is available on rank 3.

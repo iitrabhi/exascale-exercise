@@ -19,8 +19,7 @@ check[:, rank] = 1
 
 np.random.seed(rank)
 data = np.random.choice(N, M, replace=False)
-received_data = np.random.choice(N, M, replace=False)
-
+received_data = np.empty(M)
 print("This is processor ", rank, " and output", data)
 # Send data to other processors
 for i in range(0, size):
@@ -31,10 +30,7 @@ for i in range(0, size):
 for i in range(0, size):
     if not i==rank:
         comm.Recv(received_data, source=i, tag=4)
-        # print("This is processor ", rank, " and received",received_data, " from processor ", i)
         common_elements = np.intersect1d(data, received_data)
-        # print("This is processor ", rank, " common with rank ",i,"is ", common_elements)
-        # print("This is processor ", rank, " \n", data == common_elements)
         for ele in common_elements: 
             check[data == ele, i] = 1
     

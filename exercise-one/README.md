@@ -4,6 +4,12 @@ on each process (rank). The random number generator is seeded differently on eac
 each index on a rank, the program must be able to compute which other ranks also have that
 index. Bear in mind that M and the number of ranks may be large.
 
+### Running
+The file `try.py` contains a working prototype. To run use the following command in terminal
+```
+mpirun -np 3 python3 try.py
+```
+
 ### Algorithm design
 - The seeding for each processor to generate the sequence of a random integer is done with the rank of that processor.
 - Once each processor has generated the set of random numbers (NumPy vector $I_r$), then we have a dense vector of $(M\times1)$ dimension with each of the $r$ processors.

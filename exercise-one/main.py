@@ -39,8 +39,6 @@ for i in range(0, rank):
     comm.Send(receive_check_index, dest=i, tag=7)
 
 for i in range(rank+1, size):
-    # comm.Send(data, dest=i, tag=4)
-
     comm.Recv(receive_check_index, source=i, tag=7)
     check_index[:, i] = receive_check_index
 print("This is processor ", rank, " \n", check_index)

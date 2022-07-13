@@ -11,14 +11,14 @@ index. Bear in mind that M and the number of ranks may be large.
 - The current processor receives $I_r$ from the $r^{th}$ process. Now we have to make a matrix that will store boolean value at the $m^{th}$ row and the $r^{th}$ column of the `check` matrix. This will be a sparse matrix whose row number corresponds to the value we need to check, and column number corresponds to the rank of the other processor. Suppose we have set size $M=3$ and world size $P=4$. The check matrix with processor $2$ will look like.
 
 $$
-  \left[ \begin{array}{c}
+  \underbrace{\left[ \begin{array}{c}
       1   \\
       2   \\
       4
-    \end{array}\right] =
-  \left[ \begin{array}{c|c|c|c}
+    \end{array}\right]}_{\text{Index Matrix}} ,
+  \underbrace{\left[ \begin{array}{c|c|c|c}
       1 & 0 & 1 & 0 \\
       0 & 0 & 1 & 1 \\
       0 & 0 & 1 & 0
-    \end{array}\right]
+    \end{array}\right]}_{\text{Check Matrix}}
 $$

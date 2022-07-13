@@ -134,13 +134,13 @@ def quad2tri(mesh):
         tri_topo[2*i+1, :] = mesh.topology[i, np.ix_([1, 2, 3])]
     return tri_topo
 
-def plot_attribute(mesh, attribute):
+def plot_attribute(mesh, attribute, resolution = 100):
     """This method will plot the scalar attributes over a given mesh."""
     triangles = quad2tri(mesh)
     triang = mtri.Triangulation(
         mesh.geomtery[:, 0], mesh.geomtery[:, 1], triangles)
     fig, axs = plt.subplots()
     t = axs.tricontourf(triang, attribute)
-    axs.tricontour(triang, attribute, 100)
+    axs.tricontour(triang, attribute, resolution)
     fig.colorbar(t)
     plt.show()
